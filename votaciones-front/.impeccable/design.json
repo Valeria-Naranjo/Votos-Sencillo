@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-06T12:00:00-06:00",
+  "title": "Design System: Tu Voz Transforma — Sistema operativo municipal",
+  "extensions": {
+    "colorMeta": {
+      "institutional-wine": { "role": "primary", "displayName": "Guinda institucional", "canonical": "#761c35", "tonalRamp": ["#2f0715", "#4a0e24", "#65152f", "#761c35", "#9a3e59", "#bd7185", "#deb0bc", "#f5e8ec"] },
+      "shell-wine": { "role": "primary", "displayName": "Guinda de shell", "canonical": "#651d32", "tonalRamp": ["#260710", "#410d1d", "#571528", "#651d32", "#8f4355", "#b17381", "#d7adb7", "#f3e7ea"] },
+      "focus-wine": { "role": "primary", "displayName": "Guinda de foco", "canonical": "#9b2242", "tonalRamp": ["#370812", "#5a1023", "#7d1934", "#9b2242", "#ba4d67", "#d17d90", "#e7b5c0", "#faeaee"] },
+      "wine-deep": { "role": "primary", "displayName": "Vino profundo", "canonical": "#6e1738", "tonalRamp": ["#2b0716", "#450d24", "#5e1431", "#6e1738", "#93405f", "#b8758d", "#dcb0bf", "#f5e8ed"] },
+      "warm-ground": { "role": "neutral", "displayName": "Suelo cálido", "canonical": "#f6f4f1", "tonalRamp": ["#24211e", "#49443f", "#6f6962", "#969089", "#bdb8b1", "#d8d4cf", "#e9e6e2", "#f6f4f1"] },
+      "app-ground": { "role": "neutral", "displayName": "Suelo de aplicación", "canonical": "#f5f3ef", "tonalRamp": ["#25211b", "#4b4338", "#71675a", "#978d80", "#bdb5aa", "#d8d2c9", "#e9e5df", "#f5f3ef"] },
+      "surface": { "role": "neutral", "displayName": "Superficie blanca", "canonical": "#ffffff", "tonalRamp": ["#262626", "#4d4d4d", "#737373", "#999999", "#bfbfbf", "#d9d9d9", "#eeeeee", "#ffffff"] },
+      "surface-muted": { "role": "neutral", "displayName": "Superficie tenue", "canonical": "#f6f3f1", "tonalRamp": ["#251f1c", "#4b413c", "#71645d", "#988980", "#beb3ac", "#d9d2cd", "#eae6e3", "#f6f3f1"] },
+      "surface-selected": { "role": "neutral", "displayName": "Superficie seleccionada", "canonical": "#f3e8ec", "tonalRamp": ["#2b1c21", "#553942", "#805965", "#aa7d8a", "#cda9b4", "#dfc6ce", "#ead9de", "#f3e8ec"] },
+      "shell-ink": { "role": "neutral", "displayName": "Tinta de shell", "canonical": "#130d0e", "tonalRamp": ["#130d0e", "#342a2c", "#584b4e", "#7f7174", "#a79a9c", "#cbc2c4", "#e5dfe0", "#f8f5f6"] },
+      "ink": { "role": "neutral", "displayName": "Tinta operativa", "canonical": "#232323", "tonalRamp": ["#171717", "#232323", "#454545", "#696969", "#919191", "#b9b9b9", "#dddddd", "#f5f5f5"] },
+      "ink-muted": { "role": "neutral", "displayName": "Tinta silenciosa", "canonical": "#6d6865", "tonalRamp": ["#242220", "#474442", "#6d6865", "#8c8784", "#aaa6a3", "#c8c5c3", "#e2e0df", "#f6f5f4"] },
+      "border": { "role": "neutral", "displayName": "Borde cálido", "canonical": "#e8e2df", "tonalRamp": ["#27201d", "#4d413c", "#75645d", "#9c8981", "#c1b2ac", "#d7cbc6", "#e8e2df", "#f7f4f3"] },
+      "divider": { "role": "neutral", "displayName": "Divisor cálido", "canonical": "#eee9e6", "tonalRamp": ["#28211d", "#50423c", "#78665e", "#9f8c83", "#c6b6ae", "#dccfc9", "#eee9e6", "#faf7f5"] },
+      "success-ink": { "role": "tertiary", "displayName": "Éxito sobrio", "canonical": "#25643c", "tonalRamp": ["#092313", "#104024", "#195b34", "#25643c", "#4d8561", "#79a487", "#afd0b8", "#e7f4eb"] },
+      "success-surface": { "role": "tertiary", "displayName": "Superficie de éxito", "canonical": "#e7f4eb", "tonalRamp": ["#16271b", "#2c4d36", "#467554", "#6e9d78", "#9ec2a6", "#bfd9c5", "#d5e9da", "#e7f4eb"] },
+      "notice-ink": { "role": "tertiary", "displayName": "Aviso cálido", "canonical": "#6d5520", "tonalRamp": ["#251a05", "#48350c", "#6d5520", "#8c743d", "#ab945f", "#c9b786", "#e1d5b2", "#f5f0e4"] },
+      "notice-surface": { "role": "tertiary", "displayName": "Superficie de aviso", "canonical": "#f5f0e4", "tonalRamp": ["#292410", "#514822", "#796d37", "#a09655", "#c4bb80", "#ddd5a9", "#ece6ca", "#f5f0e4"] },
+      "danger-ink": { "role": "tertiary", "displayName": "Peligro administrativo", "canonical": "#a33232", "tonalRamp": ["#350909", "#5c1515", "#822424", "#a33232", "#bf5a5a", "#d88989", "#ecbaba", "#f9e8e8"] },
+      "danger-surface": { "role": "tertiary", "displayName": "Superficie de peligro", "canonical": "#f9e8e8", "tonalRamp": ["#2d1717", "#593232", "#854f4f", "#ae7474", "#d09f9f", "#e4bebe", "#f0d5d5", "#f9e8e8"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Título de página", "purpose": "Identifica la única tarea principal de la vista." },
+      "headline": { "displayName": "Encabezado de panel", "purpose": "Nombra el editor, rol seleccionado o tarea principal del panel." },
+      "title": { "displayName": "Título operativo", "purpose": "Nombra módulos, grupos, tablas y entidades." },
+      "body": { "displayName": "Contenido operativo", "purpose": "Explica alcance, dato y consecuencia de seguridad." },
+      "label": { "displayName": "Etiqueta compacta", "purpose": "Acciones, permisos, campos y metadatos densos." }
+    },
+    "shadows": [
+      { "name": "shell-stable", "value": "0 2px 14px rgba(19, 13, 14, .18)", "purpose": "Separa la topbar persistente del contenido durante scroll." },
+      { "name": "panel-ambient", "value": "0 8px 26px rgba(50, 42, 38, .07)", "purpose": "Eleva paneles raíz sobre el suelo cálido." },
+      { "name": "selection-low", "value": "0 2px 8px rgba(49, 39, 35, .09)", "purpose": "Separa una opción activa de un control segmentado." },
+      { "name": "field-focus", "value": "0 0 0 3px rgba(155, 34, 66, .1)", "purpose": "Refuerza el foco sin desplazar la geometría." }
+    ],
+    "motion": [
+      { "name": "state-fast", "value": "150ms ease", "purpose": "Hover, foco y cambio local de estado." },
+      { "name": "state-standard", "value": "200ms cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Dropdowns y relaciones espaciales breves." },
+      { "name": "drawer", "value": "300ms cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Apertura y cierre del drawer lateral." }
+    ],
+    "breakpoints": [
+      { "name": "form-single-column", "value": "639px" },
+      { "name": "menu-card-list", "value": "680px" },
+      { "name": "access-compact", "value": "900px" },
+      { "name": "menu-stack", "value": "980px" },
+      { "name": "drawer", "value": "1023px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Confirma la única acción principal del panel o formulario.",
+      "html": "<button class=\"ds-btn-primary\">Guardar cambios</button>",
+      "css": ".ds-btn-primary{min-height:44px;padding:9px 15px;border:0;border-radius:10px;background:#761c35;color:#fff;font:800 .74rem/1.25 'Nunito Sans',sans-serif;cursor:pointer;transition:background 150ms ease}.ds-btn-primary:hover{background:#6e1738}.ds-btn-primary:focus-visible{outline:3px solid rgba(118,28,53,.35);outline-offset:2px}.ds-btn-primary:active{transform:translateY(1px)}.ds-btn-primary:disabled{background:#ded8d5;color:#8b8582;cursor:not-allowed}"
+    },
+    {
+      "name": "Icon Row Action",
+      "kind": "button",
+      "refersTo": "button-icon",
+      "description": "Editar o activar/desactivar desde una posición estable y táctil.",
+      "html": "<button class=\"ds-icon-action\" aria-label=\"Editar rol\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" aria-hidden=\"true\"><path d=\"M12 20h9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/></svg></button>",
+      "css": ".ds-icon-action{width:44px;height:44px;display:grid;place-items:center;border:1px solid #d9d2cf;border-radius:9px;background:#fff;color:#651d32;cursor:pointer}.ds-icon-action:hover{background:#f3e8ec;border-color:#c8aab4}.ds-icon-action:focus-visible{outline:3px solid rgba(118,28,53,.35);outline-offset:2px}.ds-icon-action:active{transform:translateY(1px)}"
+    },
+    {
+      "name": "Canonical Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Campo etiquetado para datos administrativos dentro de la rejilla canónica.",
+      "html": "<label class=\"ds-field\"><span>Nombre del menú <b>*</b></span><input value=\"Roles y permisos\" aria-invalid=\"false\"/><small>Nombre visible en la navegación.</small></label>",
+      "css": ".ds-field{display:grid;gap:6px;color:#4e4744;font:800 .78rem/1.25 'Nunito Sans',sans-serif}.ds-field span b{color:#9b2242}.ds-field input{width:100%;min-height:42px;padding:9px 11px;border:1px solid #d8d1ce;border-radius:9px;background:#fff;color:#232323;font:550 .9rem/1.35 'Nunito Sans',sans-serif}.ds-field input:focus{outline:3px solid rgba(118,28,53,.14);border-color:#9b2242}.ds-field input[aria-invalid=true]{border-color:#a33232}.ds-field small{color:#857c78;font:600 .69rem/1.3 'Nunito Sans',sans-serif}"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "field-search",
+      "description": "Filtra una lista sin separarse de su icono ni del control para limpiar.",
+      "html": "<label class=\"ds-search\"><svg viewBox=\"0 0 24 24\" width=\"17\" height=\"17\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"m20 20-4-4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/></svg><input type=\"search\" placeholder=\"Buscar menú o ruta\"/></label>",
+      "css": ".ds-search{min-height:42px;display:flex;align-items:center;gap:8px;padding:0 12px;border:1px solid #d8d1ce;border-radius:10px;background:#fff;color:#756d69}.ds-search:focus-within{border-color:#9b2242;box-shadow:0 0 0 3px rgba(118,28,53,.1)}.ds-search input{min-width:0;width:100%;padding:10px 0;border:0;outline:0;background:transparent;color:#232323;font:400 .85rem/1.4 'Nunito Sans',sans-serif}"
+    },
+    {
+      "name": "Contained Navigation Item",
+      "kind": "nav",
+      "description": "Mantiene icono y etiqueta dentro del sidebar oscuro aun con nombres largos.",
+      "html": "<a class=\"ds-nav-item\" href=\"#\"><span class=\"ds-nav-icon\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" aria-hidden=\"true\"><path d=\"M4 5h16M4 12h16M4 19h16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/></svg></span><span class=\"ds-nav-label\">Roles y permisos</span></a>",
+      "css": ".ds-nav-item{width:calc(100% - 12px);min-height:44px;margin:1px 6px;padding:11px 12px;display:flex;align-items:center;gap:10px;overflow:hidden;border-radius:8px;background:rgba(155,34,66,.2);color:#fff;text-decoration:none}.ds-nav-item:hover{background:rgba(155,34,66,.28)}.ds-nav-item:focus-visible{outline:3px solid rgba(255,255,255,.45);outline-offset:2px}.ds-nav-icon{width:36px;height:36px;flex:0 0 auto;display:grid;place-items:center;border-radius:9px;background:rgba(155,34,66,.3)}.ds-nav-label{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:600 13px/1.3 'Nunito Sans',sans-serif}"
+    },
+    {
+      "name": "Selected Role Row",
+      "kind": "custom",
+      "description": "Mantiene visible el rol seleccionado y su volumen de usuarios.",
+      "html": "<button class=\"ds-role-row\"><span class=\"ds-role-avatar\">AD</span><span class=\"ds-role-copy\"><strong>Administrador</strong><small>4 usuarios</small></span></button>",
+      "css": ".ds-role-row{width:100%;display:flex;align-items:center;gap:10px;padding:10px;border:0;border-radius:11px;background:#f3e8ec;color:#761c35;text-align:left;cursor:pointer}.ds-role-row:hover{background:#ead9de}.ds-role-row:focus-visible{outline:3px solid rgba(118,28,53,.35);outline-offset:2px}.ds-role-avatar{width:36px;height:36px;display:grid;place-items:center;flex:0 0 auto;border-radius:10px;background:#761c35;color:#fff;font:850 .75rem/1 'Nunito Sans',sans-serif}.ds-role-copy{min-width:0;display:grid;gap:2px}.ds-role-copy strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:850 .88rem/1.2 'Nunito Sans',sans-serif}.ds-role-copy small{color:#847d79;font:400 .72rem/1.2 'Nunito Sans',sans-serif}"
+    },
+    {
+      "name": "Permission Chip",
+      "kind": "chip",
+      "refersTo": "permission-chip",
+      "description": "Concede una acción estándar sin separar permiso y etiqueta.",
+      "html": "<label class=\"ds-permission\"><input type=\"checkbox\" checked/>Editar</label>",
+      "css": ".ds-permission{display:inline-flex;align-items:center;gap:5px;padding:6px 8px;border-radius:8px;background:#f7f5f3;color:#5f5956;font:750 .74rem/1.25 'Nunito Sans',sans-serif;cursor:pointer}.ds-permission:hover{background:#eee9e6}.ds-permission:focus-within{outline:3px solid rgba(118,28,53,.28);outline-offset:2px}.ds-permission input{width:16px;height:16px;accent-color:#9b2242}"
+    },
+    {
+      "name": "Active Status",
+      "kind": "chip",
+      "refersTo": "status-active",
+      "description": "Estado activo con texto y pareja semántica de superficie y tinta.",
+      "html": "<span class=\"ds-status-active\">Activo</span>",
+      "css": ".ds-status-active{display:inline-flex;padding:4px 8px;border-radius:999px;background:#e7f4eb;color:#25643c;font:800 .7rem/1.25 'Nunito Sans',sans-serif}"
+    },
+    {
+      "name": "Root Work Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Contenedor raíz para editor, catálogo o listado operativo.",
+      "html": "<section class=\"ds-panel\"><header><strong>Menús configurados</strong><small>12 registros</small></header><div>Contenido operativo</div></section>",
+      "css": ".ds-panel{min-width:0;overflow:hidden;border-radius:15px;background:#fff;color:#232323;box-shadow:0 8px 26px rgba(50,42,38,.07);font-family:'Nunito Sans',sans-serif}.ds-panel>header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;border-bottom:1px solid #eee9e6}.ds-panel>header strong{font-size:1.05rem;font-weight:850}.ds-panel>header small{color:#7a716d;font-size:.72rem}.ds-panel>div{padding:20px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "El Libro Operativo Municipal",
+    "overview": "La aplicación se comporta como un registro administrativo contemporáneo: sobrio, explícito y preparado para decisiones repetidas con poco margen de error. Superficies blancas se apoyan sobre un suelo neutro cálido; la barra superior y el lateral oscuro anclan el contexto, mientras el guinda institucional concentra selección, foco y confirmación.\n\nLa densidad es compacta sin ser críptica. El shell permanece estable durante el desplazamiento, los textos largos nunca rompen sus contenedores y los formularios conservan una secuencia predecible desde el dato hasta la acción. Las vistas de acceso y menús son la expresión más completa del sistema: catálogo o editor a la izquierda, trabajo operativo a la derecha y una transformación deliberada a una sola columna en pantallas pequeñas.",
+    "keyCharacteristics": ["Shell institucional estable con topbar guinda fija al flujo y navegación lateral oscura contenida.", "Fondo cálido y paneles blancos con profundidad ambiental reservada a superficies raíz.", "Guinda concentrado en selección, foco, acciones y cifras relevantes.", "Jerarquía sans compacta, títulos fuertes y metadatos silenciosos.", "Rejilla de formulario de doce columnas que colapsa a una columna sin clases dinámicas.", "Listas operativas que pasan de tabla a filas apiladas; las matrices conservan juntos objeto y permisos."],
+    "rules": [
+      { "name": "The Concentrated Wine Rule", "body": "El guinda marca selección, foco o acción; las grandes áreas de lectura permanecen neutras.", "section": "colors" },
+      { "name": "The Semantic Pair Rule", "body": "Éxito, aviso y peligro combinan tinta, superficie, texto o icono; ningún estado se comunica únicamente por color.", "section": "colors" },
+      { "name": "The One Operational Voice Rule", "body": "Las superficies administrativas usan una sola voz sans; la jerarquía proviene de peso y escala, no de tipografías decorativas.", "section": "typography" },
+      { "name": "The Contained Navigation Rule", "body": "Icono, etiqueta y badge viven dentro del ancho del sidebar; las cadenas largas se recortan, nunca empujan el contenedor.", "section": "layout" },
+      { "name": "The Grouped Decision Rule", "body": "Una entidad y sus acciones permanecen juntas al cambiar de breakpoint; una pantalla nunca se separa conceptualmente de sus permisos.", "section": "layout" },
+      { "name": "The Stable Actions Rule", "body": "En formularios desplazables, encabezado y barra de acciones permanecen estables y sólo el cuerpo consume el scroll.", "section": "layout" },
+      { "name": "The Quiet Depth Rule", "body": "La sombra pertenece a jerarquía, selección y foco; grupos, filas y chips permanecen planos.", "section": "elevation" }
+    ],
+    "dos": ["Do reservar guinda para contexto institucional, selección, foco y confirmación.", "Do mantener topbar visible, sidebar contenido y textos largos dentro de su ancho.", "Do usar la rejilla canónica de doce columnas y colapsarla a una columna bajo 640px.", "Do conservar acciones visibles, de 44px y en una posición estable para mouse, teclado y touch.", "Do usar bordes y capas tonales para separar filas antes de añadir sombra.", "Do convertir tablas operativas en filas apiladas cuando el ancho ya no permita leerlas.", "Do acompañar estados semánticos con texto, icono o contexto explícito."],
+    "donts": ["Don't permitir que nombres, rutas, badges o controles sobresalgan de su panel o del sidebar.", "Don't construir spans de la rejilla con clases Tailwind dinámicas ni introducir selectores nativos en formularios nuevos.", "Don't ocultar acciones relevantes detrás de hover ni comunicar desactivación sólo por color.", "Don't elevar cada fila, grupo o permiso; la profundidad se reserva para shell, panel raíz, selección y foco.", "Don't recortar selects, tooltips o menús dentro de un ancestro con overflow oculto.", "Don't introducir tipografía ornamental, gradientes decorativos o motion que no explique estado o relación espacial en superficies administrativas."]
+  }
+}
