@@ -45,7 +45,7 @@ class ParticipationController extends BaseCrudController
             'type' => 'required|in:INE,Carta Identidad',
             'elector_key' => ['required', 'string', 'size:18', 'regex:/^[A-Z]{6}\d{6}[A-Z0-9]{6}$/'],
             'curp' => ['nullable', 'string', 'size:18', 'regex:/^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$/'],
-            'capture_method' => 'nullable|in:manual,google_vision',
+            'capture_method' => 'nullable|in:manual,google_vision,local_ocr',
         ]);
         if ($validator->fails()) return ObjResponse::validationError($validator->errors()->toArray());
 

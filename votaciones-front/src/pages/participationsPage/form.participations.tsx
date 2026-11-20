@@ -1,6 +1,8 @@
 // pages/Participations/ParticipationsForm.tsx
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import FormGeneric, { type FieldConfig } from "../../components/forms/FormGeneric";
+import IneScannerModal from "../../components/forms/IneScannerModal";
+import { type IneScanData } from "../../utils/ineParser";
 import * as Yup from "yup";
 import useParticipationsData from "../../hooks/useParticipationsData";
 import { Input, Select2 } from "../../components/forms";
@@ -22,7 +24,43 @@ const ParticipationsForm: React.FC = () => {
    const formikRef = useRef<any>(null);
    const curpInputRef = useRef<HTMLInputElement>(null); // ← REF para el input CURP
    const [ocrLoading, setOcrLoading] = useState(false);
-   const [captureMethod, setCaptureMethod] = useState<"manual" | "google_vision">("manual");
+   const [scannerOpen, setScannerOpen] = useState(false);
+   const [captureMethod, setCaptureMethod] = useState<"manual" | "google_vision" | "local_ocr">("manual");
+
+   // Limpia touched/error de los campos escaneados. Debe repetirse después de que
+   // la alerta toma el foco, porque el blur del campo puede revalidar con el valor previo.
+   const markScannedFieldsValid = useCallback(() => {
+      const formik = formikRef.current;
+      if (!formik) return;
+      ["elector_key", "curp"].forEach((field) => {
+         formik.setFieldTouched(field, false, false);
+         formik.setFieldError(field, undefined);
+      });
+   }, []);
+
+   const fillScannedData = useCallback(
+      (electorKey?: string | null, curp?: string | null) => {
+         const formik = formikRef.current;
+         if (!formik) return;
+         if (electorKey) formik.setFieldValue("elector_key", electorKey, false);
+         if (curp) formik.setFieldValue("curp", curp, false);
+         markScannedFieldsValid();
+      },
+      [markScannedFieldsValid]
+   );
+
+   const handleDetected = useCallback(
+      async (data: IneScanData) => {
+         setScannerOpen(false);
+         fillScannedData(data.electorKey, data.curp);
+         setCaptureMethod("local_ocr");
+         await sAlert.Customizable("Credencial leída", "Confirme la Clave de Elector y la CURP antes de registrar.", "success", true);
+         markScannedFieldsValid();
+      },
+      [fillScannedData, markScannedFieldsValid]
+   );
+
+   const closeScanner = useCallback(() => setScannerOpen(false), []);
 
    const handleOcr = async (file?: File) => {
       if (!file) return;
@@ -46,6 +84,7 @@ const ParticipationsForm: React.FC = () => {
       formikRef.current.setFieldValue("type", tipo);
       formikRef.current.setFieldValue("elector_key", "");
       formikRef.current.setFieldValue("curp", null);
+      setCaptureMethod("manual");
 
       participationsContext.setFieldValue("type", tipo);
       participationsContext.setFieldValue("elector_key", "");
@@ -151,13 +190,18 @@ const ParticipationsForm: React.FC = () => {
             <div className={`ocr-capture ${participationsContext.initialValues.type !== "INE" ? "hidden" : ""}`}>
                <div className="ocr-capture__icon"><icons.Lu.LuScanLine /></div>
                <div className="ocr-capture__copy">
-                  <strong>Capturar datos desde la INE</strong>
-                  <span>La imagen se procesa con Google Vision y no se almacena. Confirme siempre el resultado.</span>
+                  <strong>Escanear credencial INE</strong>
+                  <span>Lee la Clave de Elector en el teléfono con OCR local. Si falla, usa Google Vision como respaldo. La imagen no se guarda.</span>
                </div>
-               <label className={`ocr-capture__action ${ocrLoading ? "is-loading" : ""}`}>
-                  {ocrLoading ? "Procesando…" : "Tomar o elegir foto"}
-                  <input type="file" accept="image/*" capture="environment" disabled={ocrLoading} onChange={(event) => handleOcr(event.target.files?.[0])} />
-               </label>
+               <div className="ocr-capture__actions">
+                  <button type="button" className="ocr-capture__action" onClick={() => setScannerOpen(true)}>
+                     Escanear con cámara
+                  </button>
+                  <label className={`ocr-capture__action ocr-capture__action--ghost ${ocrLoading ? "is-loading" : ""}`}>
+                     {ocrLoading ? "Procesando…" : "Google Vision (respaldo)"}
+                     <input type="file" accept="image/*" capture="environment" disabled={ocrLoading} onChange={(event) => handleOcr(event.target.files?.[0])} />
+                  </label>
+               </div>
             </div>
          ),
          validations: null,
@@ -252,6 +296,7 @@ const ParticipationsForm: React.FC = () => {
                />
             </div>
          </div>
+         <IneScannerModal open={scannerOpen} onClose={closeScanner} onDetected={handleDetected} />
       </>
    );
 };
