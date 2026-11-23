@@ -367,8 +367,9 @@ export function createGenericStore<T extends { id?: number }, E = {}, P extends 
             log("removeItemData", "start", { item });
 
             const previous = get().items;
+            const itemLabel = (item as any)?.name ?? (item as any)?.project_name ?? (item as any)?.folio;
             try {
-               mySwal.fire(QuestionAlertConfig(`¿Estas seguro de eliminar el producto ${name}?`, "CONFIRMAR")).then(async (result) => {
+               mySwal.fire(QuestionAlertConfig(itemLabel ? `¿Estás seguro de eliminar "${itemLabel}"?` : "¿Estás seguro de eliminar este registro?", "CONFIRMAR")).then(async (result) => {
                   if (result.isConfirmed) {
                      const data = await repo.delete(item, get().prefix);
                      const duration = performance.now() - start;

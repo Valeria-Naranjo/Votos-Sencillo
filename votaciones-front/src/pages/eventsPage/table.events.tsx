@@ -7,8 +7,12 @@ import useEventsData from "../../hooks/useEventsData";
 const EventsTable = () => {
    const events = useEventsData();
    const edit = (row: any) => {
-      events.handleChangeItem(row);
+      // setOpen primero: restablece initialValues y luego se cargan los del evento elegido
       events.setOpen();
+      events.handleChangeItem(row);
+   };
+   const remove = (row: any) => {
+      events.removeItemData(row);
    };
    //FECHA EN ZONA HORARIA DEL CENTRO DE MÉXICO
    const formatEventDate = (value: string | null | undefined) => {
@@ -44,13 +48,23 @@ const EventsTable = () => {
             { field: "active", headerName: "Estado", renderField: (value) => renderColActive(Boolean(value)) }
          ]}
          actions={(row) => (
-            <Tooltip title="Editar evento">
-               <CustomButton color="blue" size="sm" onClick={() => edit(row)}>
-                  <icons.Lu.LuPencil />
-               </CustomButton>
-            </Tooltip>
+            <div className="grid grid-flow-col gap-1">
+               <Tooltip title="Editar evento">
+                  <CustomButton color="blue" size="sm" onClick={() => edit(row)}>
+                     <icons.Lu.LuPencil />
+                  </CustomButton>
+               </Tooltip>
+               <Tooltip title="Eliminar evento">
+                  <CustomButton color="rose" size="sm" onClick={() => remove(row)}>
+                     <icons.Lu.LuTrash2 />
+                  </CustomButton>
+               </Tooltip>
+            </div>
          )}
-         getRowActions={(row) => [{ label: "Editar", iconName: "pi-pen-to-square", handleOnClick: () => edit(row), color: "blue", permission: true }]}
+         getRowActions={(row) => [
+            { label: "Editar", iconName: "pi-pen-to-square", handleOnClick: () => edit(row), color: "blue", permission: true },
+            { label: "Eliminar", iconName: "pi-trash", handleOnClick: () => remove(row), color: "red", permission: true }
+         ]}
       />
    );
 };
