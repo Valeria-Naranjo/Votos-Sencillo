@@ -158,6 +158,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get("/selectIndex", [EventController::class, 'selectIndex'])->middleware('permission:participation_capture,view');
         Route::post("/createOrUpdate", [EventController::class, 'createOrUpdate'])->middleware('permission:events,update');
         Route::get("/id/{id}", [EventController::class, 'show'])->middleware('permission:events,view');
+        Route::delete("/delete/{id}", [EventController::class, 'destroy'])->middleware('permission:events,delete');
         Route::get("/disEnable/{id}/{active}", [EventController::class, 'disEnable'])->middleware('permission:events,delete');
     });
 

@@ -166,9 +166,11 @@ const Select2: React.FC<Select2Props> = ({
    }, [options]);
 
    useEffect(() => {
-      setValue(null);
-      if (formik.values[idName] > 0) {
-         setValue(options.find((item) => item.id === formik.values[idName]) || null);
+      const current = formik.values[idName];
+      if (current === null || current === undefined || current === "" || current === 0 || current === false) {
+         setValue(null);
+      } else {
+         setValue(options.find((item) => item.id === current) || null);
       }
    }, [idName, formik.values[idName]]);
 
