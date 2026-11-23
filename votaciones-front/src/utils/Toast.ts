@@ -6,10 +6,10 @@ type Horizontal = SnackbarOrigin["horizontal"];
 type Vertical = SnackbarOrigin["vertical"];
 
 // Helper base
-const showSnackbar = (msg: string, variant: VariantType, horizontal: Horizontal = "right", vertical: Vertical = "bottom") => {
+const showSnackbar = (msg: string, variant: VariantType, horizontal: Horizontal = "right", vertical: Vertical = "bottom", autoHideDuration = 2500) => {
    enqueueSnackbar(msg, {
       variant,
-      autoHideDuration: 2500,
+      autoHideDuration,
       anchorOrigin: { horizontal, vertical }
    });
 };
@@ -21,7 +21,8 @@ const Error = (msg: string, horizontal: Horizontal = "right", vertical: Vertical
 
 const Info = (msg: string, horizontal: Horizontal = "right", vertical: Vertical = "bottom") => showSnackbar(msg, "info", horizontal, vertical);
 
-const Warning = (msg: string, horizontal: Horizontal = "right", vertical: Vertical = "bottom") => showSnackbar(msg, "warning", horizontal, vertical);
+const Warning = (msg: string, horizontal: Horizontal = "right", vertical: Vertical = "bottom", autoHideDuration = 2500) =>
+   showSnackbar(msg, "warning", horizontal, vertical, autoHideDuration);
 
 const Default = (msg: string, horizontal: Horizontal = "right", vertical: Vertical = "bottom") => showSnackbar(msg, "default", horizontal, vertical);
 
