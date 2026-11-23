@@ -380,7 +380,13 @@ const CustomTableInner = <T extends object>(
    const [columnFilters, setColumnFilters] = useState<Record<string, string>>({});
    const [sortConfig, setSortConfig] = useState<{ field: keyof T | null; direction: "asc" | "desc" | null }>({ field: null, direction: null });
    const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
-   const [viewMode, setViewMode] = useState<ViewMode>(defaultView);
+   // En pantallas angostas la tabla ancha no cabe: se entra en vista de tarjetas
+   const narrowViewportQuery = "(max-width: 767px)";
+   const [viewMode, setViewMode] = useState<ViewMode>(() =>
+      defaultView === "table" && typeof window !== "undefined" && window.matchMedia(narrowViewportQuery).matches ? "cards" : defaultView
+   );
+   const viewTouchedRef = useRef(false);
+   const [isNarrow, setIsNarrow] = useState(() => typeof window !== "undefined" && window.matchMedia(narrowViewportQuery).matches);
    const [hoveredRow, setHoveredRow] = useState<string | null>(null);
 
    const [theme, setTheme] = useState<Theme>(defaultTheme);
@@ -441,6 +447,18 @@ const CustomTableInner = <T extends object>(
    }, [isFullscreen]);
 
    useEffect(() => setIsFirstColumnPinned(pinFirstColumn), [pinFirstColumn]);
+
+   useEffect(() => {
+      const mq = window.matchMedia(narrowViewportQuery);
+      const applyBreakpoint = () => {
+         setIsNarrow(mq.matches);
+         if (viewTouchedRef.current || defaultView !== "table") return;
+         setViewMode(mq.matches ? "cards" : "table");
+      };
+      applyBreakpoint();
+      mq.addEventListener("change", applyBreakpoint);
+      return () => mq.removeEventListener("change", applyBreakpoint);
+   }, [defaultView]);
 
    useEffect(() => {
       const tableScroller = tableScrollRef.current;
@@ -1897,7 +1915,7 @@ const CustomTableInner = <T extends object>(
 
    // ========== RENDER CARDS ==========
    const renderCards = () => (
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))", gap: 16, padding: 24, background: C.pageBg }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 290px), 1fr))", gap: 16, padding: 24, background: C.pageBg }}>
          {currentRows.map((row, idx) => {
             const rowId = getRowId(row as any, 0, startIndex + idx);
             const isSelected = selectedRows.has(rowId);
@@ -2069,10 +2087,10 @@ const CustomTableInner = <T extends object>(
                   >
                      {String(getTitle(row)).charAt(0).toUpperCase()}
                   </div>
-                  <div style={{ flex: 1, minWidth: 0, display: "grid", gridTemplateColumns: `repeat(${Math.min(normalColumns.length, 4)}, 1fr)`, gap: 8 }}>
+                  <div style={{ flex: 1, minWidth: 0, display: "grid", gridTemplateColumns: `repeat(${Math.min(normalColumns.length, isNarrow ? 2 : 4)}, minmax(0, 1fr))`, gap: 8 }}>
                      {normalColumns.slice(0, 4).map((col) => (
                         <div key={String(col.field)} style={{ minWidth: 0 }}>
-                           <div style={{ fontSize: 9, fontWeight: 700, color: C.text3, textTransform: "uppercase", letterSpacing: "0.06em" }}>{col.headerName}</div>
+                           <div style={{ fontSize: 9, fontWeight: 700, color: C.text3, textTransform: "uppercase", letterSpacing: "0.06em", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{col.headerName}</div>
                            <div style={{ fontSize: 12, color: C.text1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                               {col.renderField ? col.renderField(row[col.field], row) : String(row[col.field] ?? "—")}
                            </div>
@@ -2616,6 +2634,44 @@ const CustomTableInner = <T extends object>(
                </div>
 
                <div style={{ display: "flex", gap: 4, marginLeft: "auto", flexWrap: "wrap", justifyContent: "flex-end" }}>
+                  {enableViewToggle && (
+                     <div style={{ display: "flex", background: C.surface, border: `1px solid ${C.border}`, borderRadius: C.r6, padding: 3, gap: 2 }}>
+                        {(
+                           [
+                              { mode: "table" as ViewMode, label: "Vista de tabla", icon: <icons.Fi.FiGrid size={12} /> },
+                              { mode: "cards" as ViewMode, label: "Vista de tarjetas", icon: <icons.Fi.FiColumns size={12} /> },
+                              { mode: "compact" as ViewMode, label: "Vista compacta", icon: <icons.Fi.FiList size={12} /> }
+                           ]
+                        ).map(({ mode, label, icon }) => (
+                           <button
+                              key={mode}
+                              onClick={() => {
+                                 viewTouchedRef.current = true;
+                                 setViewMode(mode);
+                              }}
+                              title={label}
+                              aria-label={label}
+                              aria-pressed={viewMode === mode}
+                              style={{
+                                 width: 24,
+                                 height: 24,
+                                 display: "flex",
+                                 alignItems: "center",
+                                 justifyContent: "center",
+                                 borderRadius: 6,
+                                 border: "none",
+                                 cursor: "pointer",
+                                 background: viewMode === mode ? C.ruby : "transparent",
+                                 color: viewMode === mode ? "#fff" : C.text3,
+                                 transition: "all 0.15s"
+                              }}
+                           >
+                              {icon}
+                           </button>
+                        ))}
+                     </div>
+                  )}
+
                   {enableDensityControl && (
                      <div style={{ display: "flex", background: C.surface, border: `1px solid ${C.border}`, borderRadius: C.r6, padding: 3, gap: 2 }}>
                         {(["compact", "comfortable", "spacious"] as DensityMode[]).map((d) => (
@@ -3000,7 +3056,7 @@ const CustomTableInner = <T extends object>(
                   de <strong style={{ color: C.text1 }}>{totalRows}</strong>
                </span>
 
-               <div style={{ display: "flex", alignItems: "center", gap: 3, order: 2 }}>
+               <div style={{ display: "flex", alignItems: "center", gap: 3, order: 2, flexWrap: "wrap", justifyContent: "center" }}>
                   <PgBtn onClick={() => setCurrentPage(1)} disabled={currentPage === 1} C={C}>
                      <span style={{ fontSize: 10 }}>«</span>
                   </PgBtn>

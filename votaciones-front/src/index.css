@@ -3321,7 +3321,7 @@ tbody td {
 .ocr-capture {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 0.9rem;
   padding: 0.9rem 1rem;
@@ -3335,7 +3335,7 @@ tbody td {
 .ocr-capture__action { cursor: pointer; white-space: nowrap; border-radius: 0.65rem; padding: 0.65rem 0.85rem; color: white; background: var(--primary-color, #9b2242); font-size: 0.78rem; font-weight: 750; }
 .ocr-capture__action input { position: absolute; inline-size: 1px; block-size: 1px; opacity: 0; }
 .ocr-capture__action.is-loading { cursor: wait; opacity: 0.72; }
-.ocr-capture__actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.ocr-capture__actions { display: flex; grid-column: 1 / -1; flex-wrap: wrap; justify-content: flex-start; gap: 0.5rem; }
 .ocr-capture__action--ghost { color: var(--primary-color, #9b2242); background: white; border: 1px solid color-mix(in srgb, var(--primary-color, #9b2242) 35%, white); }
 .ocr-capture__action:disabled { cursor: wait; opacity: 0.72; }
 @media (max-width: 680px) {
@@ -3490,4 +3490,24 @@ tbody td {
 @media (max-width: 520px) {
   .ine-scanner__actions { flex-direction: column-reverse; }
   .ine-scanner__btn { width: 100%; }
+}
+
+/* Registro de participaciones en teléfono */
+.ocr-capture.hidden { display: none; }
+@media (max-width: 560px) {
+  .page { padding: .5rem; }
+  .page-header h1 { font-size: 1.55rem; line-height: 1.15; }
+  .card { margin: 0 0 16px; }
+  .card-header { padding: 14px 16px; }
+  .card-body { padding: 16px; }
+  .doc-selector { grid-template-columns: minmax(0, 1fr); gap: 10px; margin-bottom: 18px; }
+  .doc-selector > .col-span-2 { grid-column: 1 / -1; width: 100%; }
+  .doc-option { display: grid; grid-template-columns: 44px minmax(0, 1fr); grid-template-rows: auto auto; align-items: center; column-gap: 12px; row-gap: 2px; padding: 12px 36px 12px 14px; text-align: left; }
+  .doc-icon-wrap { grid-row: 1 / span 2; margin: 0; font-size: 30px; line-height: 1; }
+  .doc-label { margin: 0; font-size: 14px; }
+  .doc-desc { font-size: 11px; }
+  .doc-check { top: 9px; right: 9px; }
+  .ocr-capture { padding: 12px; gap: 10px; }
+  .ocr-capture__copy span { font-size: 0.74rem; }
+  .ocr-capture__action { white-space: normal; }
 }
