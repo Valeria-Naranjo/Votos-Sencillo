@@ -382,6 +382,7 @@ export function createGenericStore<T extends { id?: number }, E = {}, P extends 
                         log("removeItemData", "success", { message: data.message }, duration);
                      } else {
                         set({ items: previous } as any);
+                        Toast.Customizable(data.message || cfg.messages.unknownError, "error");
                         log("removeItemData", "error", { message: data.message }, duration);
                      }
                   } else {

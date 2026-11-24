@@ -22,7 +22,7 @@ const Boleta: React.FC = () => {
 
    const { state, dropRef, slideClass, handleIdentidadChange, handleStep0, handleStep1, handleSubmit, resetBoleta, addVote, removeVote, goStep, setField } =
       useBoleta();
-   const eventProjects = state.eventId ? projects.filter((project) => project.event_id === state.eventId && project.active !== false) : [];
+   const eventProjects = projects.filter((project) => project.active !== false && (import.meta.env.DEV || project.event_id === state.eventId));
 
    // Inicializar voterCasilla con la casilla del usuario autenticado
    useEffect(() => {

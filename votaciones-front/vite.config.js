@@ -10,7 +10,8 @@ export default defineConfig({
     server: {
         // https: httpsConfig,
         // host: "0.0.0.0", // Acepta conexiones desde cualquier IP en la red local
-        port: 5173 // Puerto en el que corre el servidor (puedes cambiarlo si es necesario)
+        port: 5173, // Puerto en el que corre el servidor (puedes cambiarlo si es necesario)
+        allowedHosts: [".trycloudflare.com"] // Túneles temporales de Cloudflare
     },
     plugins: [tailwindcss(), react()]
 });

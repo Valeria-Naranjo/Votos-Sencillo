@@ -97,7 +97,9 @@ class BallotController extends BaseCrudController
             if (count($request->votes) > ($participation->event?->max_votes ?? 5)) {
                 return ObjResponse::validationError(['votes' => ['La selección supera el máximo configurado para el evento.']]);
             }
-            $validProjects = Project::where('event_id', $participation->event_id)->where('assigned_district', $district)->where('active', true)->whereIn('id', $request->votes)->count();
+            $validProjects = Project::where('assigned_district', $district)->where('active', true)->whereIn('id', $request->votes)
+                ->when(!app()->environment('local'), fn ($query) => $query->where('event_id', $participation->event_id))
+                ->count();
             if ($validProjects !== count($request->votes)) return ObjResponse::validationError(['votes' => ['Hay proyectos que no pertenecen al evento y distrito autorizados o están inactivos.']]);
 
             $votes = array_pad(array_values($request->votes), 5, null);

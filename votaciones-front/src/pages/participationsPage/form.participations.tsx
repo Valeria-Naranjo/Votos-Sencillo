@@ -111,7 +111,16 @@ const ParticipationsForm: React.FC = () => {
       {
          name: "event_id",
          value: 0,
-         input: <Select2 key="event_id" col={12} idName="event_id" label="Evento" options={eventsContext.items.filter((event) => event.active).map((event) => ({ id: event.id, label: event.name }))} required />,
+         input: (
+            <Select2
+               key="event_id"
+               col={12}
+               idName="event_id"
+               label="Evento"
+               options={eventsContext.items.filter((event) => event.active).map((event) => ({ id: event.id, label: event.name }))}
+               required
+            />
+         ),
          validations: Yup.number().min(1, "Seleccione el evento").required("El evento es obligatorio"),
          validationPage: [],
          dividerBefore: { show: true, title: "Evento activo", orientation: "horizontal", className: "" }
@@ -171,15 +180,32 @@ const ParticipationsForm: React.FC = () => {
                />
             </div>
          ),
-         validations: Yup.string().trim().uppercase().matches(/^[A-Z]{6}\d{6}[A-Z0-9]{6}$/, "La Clave de Elector debe contener 18 caracteres").required("La Clave de Elector es obligatoria"),
+         validations: Yup.string()
+            .trim()
+            .uppercase()
+            .matches(/^[A-Z]{6}\d{6}[A-Z0-9]{6}$/, "La Clave de Elector debe contener 18 caracteres")
+            .required("La Clave de Elector es obligatoria"),
          validationPage: [],
          dividerBefore: { show: false, title: "", orientation: "horizontal", className: "" }
       },
       {
          name: "curp",
          value: null,
-         input: <div className={!participationsContext.initialValues.type ? "hidden" : ""}><Input col={12} idName="curp" label="CURP (opcional)" sizeCols={{md:12,xs:12,sm:12}} placeholder="Puede capturarla manualmente o mediante OCR" helperText="Dato complementario; revise siempre el resultado del OCR." /></div>,
-         validations: Yup.string().nullable().test("curp-valid", "Formato de CURP inválido", (value) => !value || validateCURP(value)),
+         input: (
+            <div className={!participationsContext.initialValues.type ? "hidden" : ""}>
+               <Input
+                  col={12}
+                  idName="curp"
+                  label="CURP (opcional)"
+                  sizeCols={{ md: 12, xs: 12, sm: 12 }}
+                  placeholder="Puede capturarla manualmente o mediante OCR"
+                  helperText="Dato complementario; revise siempre el resultado del OCR."
+               />
+            </div>
+         ),
+         validations: Yup.string()
+            .nullable()
+            .test("curp-valid", "Formato de CURP inválido", (value) => !value || validateCURP(value)),
          validationPage: [],
          dividerBefore: { show: false, title: "", orientation: "horizontal", className: "" }
       },
@@ -188,19 +214,22 @@ const ParticipationsForm: React.FC = () => {
          value: null,
          input: (
             <div className={`ocr-capture ${participationsContext.initialValues.type !== "INE" ? "hidden" : ""}`}>
-               <div className="ocr-capture__icon"><icons.Lu.LuScanLine /></div>
+               <div className="ocr-capture__icon">
+                  <icons.Lu.LuScanLine />
+               </div>
                <div className="ocr-capture__copy">
                   <strong>Escanear credencial INE</strong>
-                  <span>Lee la Clave de Elector en el teléfono con OCR local. Si falla, usa Google Vision como respaldo. La imagen no se guarda.</span>
+                  <span>Lee la Clave de Elector en el teléfono abriendo la cámara para capturar la información.</span>
                </div>
                <div className="ocr-capture__actions">
                   <button type="button" className="ocr-capture__action" onClick={() => setScannerOpen(true)}>
                      Escanear con cámara
                   </button>
+                  {/* OPCIÓN DE RESPALDO
                   <label className={`ocr-capture__action ocr-capture__action--ghost ${ocrLoading ? "is-loading" : ""}`}>
                      {ocrLoading ? "Procesando…" : "Google Vision (respaldo)"}
                      <input type="file" accept="image/*" capture="environment" disabled={ocrLoading} onChange={(event) => handleOcr(event.target.files?.[0])} />
-                  </label>
+                  </label> */}
                </div>
             </div>
          ),
@@ -217,7 +246,12 @@ const ParticipationsForm: React.FC = () => {
    const onSubmit = async (values: any) => {
       // El user_id se añadirá en beforePost del hook
       const { ocr_capture: _ocrCapture, ...registrationValues } = values;
-      const res = await participationsContext.request({ method: "POST", url: `${participationsContext.prefix}/register-voter`, data: { ...registrationValues, capture_method: captureMethod }, getData: true });
+      const res = await participationsContext.request({
+         method: "POST",
+         url: `${participationsContext.prefix}/register-voter`,
+         data: { ...registrationValues, capture_method: captureMethod },
+         getData: true
+      });
       // console.log("🚀 ~ onSubmit ~ res:", res);
       const electorErrors = (res as any)?.error?.elector_key;
       const isDuplicate = Array.isArray(electorErrors) && electorErrors.some((message: string) => /ya fue registrado/i.test(message));
@@ -240,7 +274,12 @@ const ParticipationsForm: React.FC = () => {
       }
       const issued = res?.result ?? res?.data?.result ?? res;
       if (issued?.folio && issued?.otp) {
-         await sAlert.Customizable("Registro completado", `<div style="text-align:center"><p>Folio</p><strong style="font-size:1.3rem">${issued.folio}</strong><p style="margin-top:12px">Código para abrir la boleta</p><strong style="font-size:2rem;letter-spacing:.25rem;color:#9B2242">${issued.otp}</strong><p style="margin-top:12px">Entréguelo únicamente al ciudadano.</p></div>`, "success", true);
+         await sAlert.Customizable(
+            "Registro completado",
+            `<div style="text-align:center"><p>Folio</p><strong style="font-size:1.3rem">${issued.folio}</strong><p style="margin-top:12px">Código para abrir la boleta</p><strong style="font-size:2rem;letter-spacing:.25rem;color:#9B2242">${issued.otp}</strong><p style="margin-top:12px">Entréguelo únicamente al ciudadano.</p></div>`,
+            "success",
+            true
+         );
       }
       formikRef.current.resetForm();
       setCaptureMethod("manual");
